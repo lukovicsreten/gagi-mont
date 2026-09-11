@@ -46,6 +46,18 @@ const jobs = [
   // Rolo garazna vrata — uspravni kadrovi, secemo prazan asfalt/travu u dnu.
   { src: 'garazna-bela.jpg',     out: 'rolo-garazna-vrata-bela',     w: 900, crop: { left: 0.02, right: 0.02, top: 0, bottom: 0.14 } },
   { src: 'garazna-antracit.jpg', out: 'rolo-garazna-vrata-antracit', w: 900, crop: { left: 0, right: 0, top: 0.04, bottom: 0.20 } },
+
+  // Harmonika vrata — izvor su snimci ekrana 1080x2400 sa sajta narucioca posla.
+  // Sadrzaj fotografije je kvadrat pune sirine; kod prve dve strelice galerije
+  // sede na bocnim ivicama, pa se secu po 140 px sa svake strane.
+  { src: 'harmonika-drvo-igraonica.jpg', out: 'harmonika-vrata-drvo-igraonica', w: 900,
+    crop: { left: 0.1296, right: 0.1296, top: 0.30125, bottom: 0.24917 } },
+  { src: 'harmonika-bela-dnevna.jpg',    out: 'harmonika-vrata-bela',           w: 900,
+    crop: { left: 0.1296, right: 0.1296, top: 0.30125, bottom: 0.24917 } },
+  { src: 'harmonika-drvo-hodnik.jpg',    out: 'harmonika-vrata-drvo-hodnik',    w: 900,
+    crop: { left: 0, right: 0, top: 0.26917, bottom: 0.28125 } },
+  { src: 'harmonika-kuhinja.jpg',        out: 'harmonika-vrata-kuhinja',        w: 900,
+    crop: { left: 0, right: 0, top: 0.26917, bottom: 0.28125 } },
 ];
 
 function region(meta, crop) {
