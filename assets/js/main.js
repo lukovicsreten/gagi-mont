@@ -305,4 +305,29 @@
     }
   }
 
+  /* ----------------- 9. E-mail: klik uvek negde odvede ------------------- */
+
+  // Na telefonu mailto: uredno otvori aplikaciju za postu. Na racunaru bez
+  // podesenog programa klik ne uradi bukvalno nista, pa tamo otvaramo Gmail
+  // sa vec upisanim primaocem i naslovom.
+
+  var MAIL   = 'gaggimont@gmail.com';
+  var NASLOV = 'Upit sa sajta GAGI MONT';
+
+  function imaDodir() {
+    return window.matchMedia && window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+  }
+
+  $$('.js-mail').forEach(function (veza) {
+    veza.addEventListener('click', function (e) {
+      if (imaDodir()) return;   // pusti mailto: da odradi svoje
+      e.preventDefault();
+      window.open(
+        'https://mail.google.com/mail/?view=cm&fs=1&to=' + encodeURIComponent(MAIL) +
+        '&su=' + encodeURIComponent(NASLOV),
+        '_blank', 'noopener'
+      );
+    });
+  });
+
 })();

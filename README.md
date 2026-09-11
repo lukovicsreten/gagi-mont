@@ -117,6 +117,18 @@ Viberu. Ako nije, dugme otvori aplikaciju i javi da broj nije dostupan.
 Ispod dugmadi stoji i telefon, pa upit ne propada ni ako korisnik nema nijednu
 od te dve aplikacije.
 
+### E-mail link
+
+Adresa u kontaktu i footeru ima klasu `js-mail`. Ponaša se različito po uređaju:
+
+- **telefon / tablet** — pušta `mailto:` da otvori aplikaciju za poštu
+- **računar** — otvara Gmail sastavljanje u novom tabu, sa upisanim primaocem
+  i naslovom
+
+Razlog: na računaru bez podešenog programa za poštu `mailto:` klik ne uradi
+ništa, pa posetilac pomisli da link ne radi. Ako se ikad pređe na drugu adresu
+koja nije Gmail, obriši taj deo u `main.js` (odeljak 9) i ostaće čist `mailto:`.
+
 ---
 
 ## 5. Pre nego što ide uživo (checklist)
