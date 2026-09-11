@@ -796,7 +796,14 @@
       <!--
         TODO: dodaj slike za kategorije koje trenutno nemaju svoju fotografiju:
               venecijaneri, okapnice, rasveta / lusteri / plafonjere.
-              Novu sliku ubaci u /assets/images i kopiraj blok <figure class="shot"> odozgo.
+
+        Kako se dodaje nova slika:
+          1. Obradi je kroz optimize-images.mjs (npm run slike) da zavrsi u /assets/images.
+          2. Kopiraj jedan <figure> blok odozgo i zameni src, width, height, alt i figcaption.
+          3. OBAVEZNO upisi data-kat, inace se slika nece pojaviti ni u jednom filteru
+             osim "Sve". Dozvoljene vrednosti, razdvojene razmakom ako ih ima vise:
+             roletne | tende | zavese | komarnici | harmonika | garazna | terasa
+          Brojeve u filter traci ne diraj — racunaju se sami iz galerije.
       -->
     </div>
   </div>
