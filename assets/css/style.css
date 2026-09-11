@@ -462,6 +462,26 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   display: grid; gap: clamp(22px, 3vw, 34px);
   grid-template-columns: repeat(2, 1fr);
 }
+a.about-item {
+  display: block; color: inherit; text-decoration: none;
+  transition: transform .25s var(--ease), box-shadow .25s var(--ease), border-color .25s var(--ease);
+}
+a.about-item:hover {
+  transform: translateY(-4px);
+  border-color: var(--sand-2);
+  box-shadow: var(--shadow-md);
+}
+a.about-item img { transition: transform .5s var(--ease); }
+a.about-item:hover img { transform: scale(1.04); }
+.about-more {
+  display: inline-flex; align-items: center; gap: 8px;
+  margin: 16px 30px 0;
+  color: var(--accent); font-weight: 650; font-size: .95rem;
+}
+a.about-item:hover .about-more { color: var(--accent-2); }
+.about-more .ico { transition: transform .25s var(--ease); }
+a.about-item:hover .about-more .ico { transform: translateX(4px); }
+
 .about-item {
   background: var(--paper);
   border: 1px solid var(--line);
@@ -513,6 +533,33 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 }
 
 /* ------------------------------- Galerija ------------------------------- */
+
+/* Filter galerije po usluzi — sedi u tamnoj sekciji. */
+.gal-filter {
+  display: flex; flex-wrap: wrap; gap: 10px;
+  margin: -14px 0 30px;
+}
+.filter-btn {
+  font: inherit; font-weight: 600; font-size: .93rem;
+  display: inline-flex; align-items: baseline; gap: 7px;
+  padding: 9px 17px;
+  color: rgba(255, 255, 255, .74);
+  background: transparent;
+  border: 1px solid var(--line-dark);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background .2s var(--ease), color .2s var(--ease), border-color .2s var(--ease);
+}
+.filter-btn:hover { color: #fff; border-color: rgba(255, 255, 255, .34); }
+.filter-btn.is-on {
+  color: #fff;
+  background: var(--accent);
+  border-color: var(--accent);
+}
+.filter-n { font-size: .82em; opacity: .62; font-variant-numeric: tabular-nums; }
+.filter-btn.is-on .filter-n { opacity: .78; }
+
+.gal-prazno { color: rgba(255, 255, 255, .6); margin-bottom: 30px; }
 
 .gallery { columns: 3; column-gap: 16px; }
 .shot { margin: 0 0 16px; break-inside: avoid; }
@@ -898,6 +945,9 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   .service-feature { grid-column: auto; }
   .service-feature-body { padding: 26px 24px; }
   .gallery { columns: 1; }
+  /* Osam pilula na uskom ekranu — sitnije, da traka ne pojede pola ekrana. */
+  .gal-filter { gap: 8px; }
+  .filter-btn { font-size: .86rem; padding: 7px 13px; gap: 5px; }
   .field-row { grid-template-columns: 1fr; gap: 0; }
   .footer-grid { grid-template-columns: 1fr; }
   .footer-brand { grid-column: auto; }

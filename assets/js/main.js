@@ -100,12 +100,18 @@
   var lbImg     = $('#lbImg');
   var lbCaption = $('#lbCaption');
   var shots     = $$('#gallery .shot');
+  var vidljive  = shots.slice();   // podskup koji filter trenutno prikazuje
   var current   = 0;
   var lastFocus = null;
 
+  function osveziVidljive() {
+    vidljive = shots.filter(function (fig) { return !fig.hidden; });
+  }
+
   function show(index) {
-    current = (index + shots.length) % shots.length;
-    var fig = shots[current];
+    if (!vidljive.length) return;
+    current = (index + vidljive.length) % vidljive.length;
+    var fig = vidljive[current];
     var img = $('img', fig);
     var cap = $('figcaption', fig);
 
@@ -133,9 +139,73 @@
     if (lastFocus) lastFocus.focus();
   }
 
-  shots.forEach(function (fig, i) {
-    $('.shot-btn', fig).addEventListener('click', function () { openLightbox(i); });
+  shots.forEach(function (fig) {
+    $('.shot-btn', fig).addEventListener('click', function () {
+      osveziVidljive();
+      openLightbox(vidljive.indexOf(fig));
+    });
   });
+
+  /* --------------------- 5b. Filter galerije po usluzi -------------------- */
+
+  var filterBtns = $$('.filter-btn');
+  var galPrazno  = $('#galPrazno');
+
+  function kategorijeOd(fig) {
+    return (fig.getAttribute('data-kat') || '').split(' ');
+  }
+
+  // Brojevi pored naziva se racunaju iz same galerije, da ne zastare.
+  filterBtns.forEach(function (btn) {
+    var kat = btn.getAttribute('data-kat');
+    var n = kat === 'sve'
+      ? shots.length
+      : shots.filter(function (fig) { return kategorijeOd(fig).indexOf(kat) !== -1; }).length;
+    $('.filter-n', btn).textContent = n;
+    btn.hidden = n === 0;
+  });
+
+  function primeniFilter(kat, pomeriUrl) {
+    if (!filterBtns.some(function (b) { return b.getAttribute('data-kat') === kat; })) kat = 'sve';
+
+    shots.forEach(function (fig) {
+      var prikazi = kat === 'sve' || kategorijeOd(fig).indexOf(kat) !== -1;
+      fig.hidden = !prikazi;
+      // Slike koje observer nije stigao da otkrije ostale bi providne.
+      if (prikazi) fig.classList.add('is-in');
+    });
+
+    filterBtns.forEach(function (btn) {
+      var on = btn.getAttribute('data-kat') === kat;
+      btn.classList.toggle('is-on', on);
+      btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+
+    osveziVidljive();
+    galPrazno.hidden = vidljive.length > 0;
+
+    if (pomeriUrl && window.history && history.replaceState) {
+      history.replaceState(null, '',
+        location.pathname + (kat === 'sve' ? '' : '?usluga=' + kat) + '#galerija');
+    }
+  }
+
+  filterBtns.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      primeniFilter(btn.getAttribute('data-kat'), true);
+    });
+  });
+
+  // Kartice u "O nama" vode na galeriju vec filtriranu na tu uslugu.
+  $$('.about-item[data-kat]').forEach(function (kartica) {
+    kartica.addEventListener('click', function () {
+      primeniFilter(kartica.getAttribute('data-kat'), true);
+    });
+  });
+
+  // Deljiv link oblika ...?usluga=zavese#galerija
+  var izUrl = /[?&]usluga=([a-z]+)/.exec(location.search);
+  if (izUrl) primeniFilter(izUrl[1], false);
 
   $('#lbClose').addEventListener('click', closeLightbox);
   $('#lbPrev').addEventListener('click', function () { show(current - 1); });

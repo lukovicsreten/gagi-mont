@@ -339,7 +339,8 @@
 
     <div class="about-grid">
 
-      <article class="about-item reveal">
+      <a class="about-item reveal" href="#galerija" data-kat="roletne"
+         aria-label="Pogledajte galeriju: Roletne">
         <img src="assets/images/roletne-komarnici-kuca.webp" width="1600" height="600" loading="lazy" decoding="async"
              alt="Spoljne aluminijumske roletne u antracit boji sa ugrađenim komarnicima na porodičnoj kući">
         <h3>Roletne</h3>
@@ -348,9 +349,13 @@
           spoljne roletne donose i <strong>dodatnu izolaciju</strong>, zaštitu od buke
           i viši nivo sigurnosti objekta.
         </p>
-      </article>
+        <span class="about-more">Pogledajte radove
+          <svg class="ico" aria-hidden="true"><use href="#i-strelica"/></svg>
+        </span>
+      </a>
 
-      <article class="about-item reveal" data-delay="1">
+      <a class="about-item reveal" data-delay="1" href="#galerija" data-kat="tende"
+         aria-label="Pogledajte galeriju: Tende">
         <img src="assets/images/tende-restoran-terasa.webp" width="900" height="1520" loading="lazy" decoding="async"
              alt="Zeleno-bele tende iznad bašte restorana, pogled odozdo na razapeto platno">
         <h3>Tende</h3>
@@ -359,9 +364,13 @@
           modeli štite od sunca i kiše, a prostoru daju i estetski karakter —
           bašta postaje produžetak enterijera.
         </p>
-      </article>
+        <span class="about-more">Pogledajte radove
+          <svg class="ico" aria-hidden="true"><use href="#i-strelica"/></svg>
+        </span>
+      </a>
 
-      <article class="about-item reveal" data-delay="2">
+      <a class="about-item reveal" data-delay="2" href="#galerija" data-kat="zavese"
+         aria-label="Pogledajte galeriju: Zavese">
         <img src="assets/images/zebra-zavese-enterijer.webp" width="900" height="1795" loading="lazy" decoding="async"
              alt="Bele zebra zavese na balkonskim vratima i prozoru u dnevnoj sobi">
         <h3>Zavese</h3>
@@ -370,9 +379,13 @@
           <strong>zebra zavese</strong>, <strong>rolo zavese</strong> i
           <strong>trakaste zavese</strong> za kontrolu svetlosti i privatnost.
         </p>
-      </article>
+        <span class="about-more">Pogledajte radove
+          <svg class="ico" aria-hidden="true"><use href="#i-strelica"/></svg>
+        </span>
+      </a>
 
-      <article class="about-item reveal" data-delay="3">
+      <a class="about-item reveal" data-delay="3" href="#galerija" data-kat="komarnici"
+         aria-label="Pogledajte galeriju: Komarnici">
         <img src="assets/images/komarnik-plise-vrata.webp" width="900" height="1840" loading="lazy" decoding="async"
              alt="Plise komarnik na ulaznim vratima i rolo komarnik na prozoru u antracit boji">
         <h3>Komarnici</h3>
@@ -380,9 +393,13 @@
           Fiksni, klizni, rolo i ram komarnici za vrata i prozore. Mreža se uklapa u
           boju stolarije, ne smeta pogledu i leto prolazi bez insekata u kući.
         </p>
-      </article>
+        <span class="about-more">Pogledajte radove
+          <svg class="ico" aria-hidden="true"><use href="#i-strelica"/></svg>
+        </span>
+      </a>
 
-      <article class="about-item reveal" data-delay="4">
+      <a class="about-item reveal" data-delay="4" href="#galerija" data-kat="harmonika"
+         aria-label="Pogledajte galeriju: Harmonika vrata">
         <img src="assets/images/harmonika-vrata-drvo-hodnik.webp" width="900" height="899" loading="lazy" decoding="async"
              alt="Harmonika vrata u dekoru drveta ugrađena u prolaz između hodnika i sobe">
         <h3>Harmonika vrata</h3>
@@ -391,9 +408,13 @@
           u prostoriju. Rešenje za kupatila, ostave i uske prolaze, gde klasičnim vratima
           treba prostor za otvaranje. Dekor drveta ili bela, po meri otvora.
         </p>
-      </article>
+        <span class="about-more">Pogledajte radove
+          <svg class="ico" aria-hidden="true"><use href="#i-strelica"/></svg>
+        </span>
+      </a>
 
-      <article class="about-item reveal" data-delay="5">
+      <a class="about-item reveal" data-delay="5" href="#galerija" data-kat="garazna"
+         aria-label="Pogledajte galeriju: Rolo garažna vrata">
         <img src="assets/images/rolo-garazna-vrata-antracit.webp" width="900" height="1216" loading="lazy" decoding="async"
              alt="Rolo garažna vrata u antracit boji sa kasetom iznad ulaza u garažu">
         <h3>Rolo garažna vrata</h3>
@@ -402,7 +423,10 @@
           <strong>sigurnosnom blokadom</strong> pri spuštanju. Namotavaju se u kasetu
           iznad otvora, pa ne oduzimaju prostor ni u garaži ni ispred nje.
         </p>
-      </article>
+        <span class="about-more">Pogledajte radove
+          <svg class="ico" aria-hidden="true"><use href="#i-strelica"/></svg>
+        </span>
+      </a>
 
     </div>
   </div>
@@ -450,9 +474,22 @@
       </p>
     </header>
 
+    <div class="gal-filter reveal" role="group" aria-label="Prikaz galerije po usluzi">
+      <button type="button" class="filter-btn is-on" data-kat="sve" aria-pressed="true">Sve<span class="filter-n" aria-hidden="true"></span></button>
+      <button type="button" class="filter-btn" data-kat="roletne" aria-pressed="false">Roletne<span class="filter-n" aria-hidden="true"></span></button>
+      <button type="button" class="filter-btn" data-kat="tende" aria-pressed="false">Tende<span class="filter-n" aria-hidden="true"></span></button>
+      <button type="button" class="filter-btn" data-kat="zavese" aria-pressed="false">Zavese<span class="filter-n" aria-hidden="true"></span></button>
+      <button type="button" class="filter-btn" data-kat="komarnici" aria-pressed="false">Komarnici<span class="filter-n" aria-hidden="true"></span></button>
+      <button type="button" class="filter-btn" data-kat="harmonika" aria-pressed="false">Harmonika vrata<span class="filter-n" aria-hidden="true"></span></button>
+      <button type="button" class="filter-btn" data-kat="garazna" aria-pressed="false">Garažna vrata<span class="filter-n" aria-hidden="true"></span></button>
+      <button type="button" class="filter-btn" data-kat="terasa" aria-pressed="false">Zatvaranje terase<span class="filter-n" aria-hidden="true"></span></button>
+    </div>
+
+    <p class="gal-prazno" id="galPrazno" hidden>Za ovu uslugu još nema fotografija.</p>
+
     <div class="gallery" id="gallery">
       <!-- data-caption se prikazuje u lightbox-u -->
-      <figure class="shot reveal">
+      <figure class="shot reveal" data-kat="tende">
         <button type="button" class="shot-btn" aria-label="Uvećaj: rasklopljena tenda iznad terase">
           <img src="assets/images/tenda-rasklopljena.webp" width="1600" height="640" loading="lazy" decoding="async"
                alt="Velika rasklopljena tenda sa bež prugama iznad terase porodične kuće">
@@ -460,7 +497,7 @@
         <figcaption>Tenda na kućnoj terasi</figcaption>
       </figure>
 
-      <figure class="shot reveal">
+      <figure class="shot reveal" data-kat="tende">
         <button type="button" class="shot-btn" aria-label="Uvećaj: zeleno-bele tende iznad bašte restorana">
           <img src="assets/images/tende-kafic-basta.webp" width="900" height="1510" loading="lazy" decoding="async"
                alt="Niz zeleno-belih tendi razapetih iznad bašte kafića sa drvenim stolovima">
@@ -468,7 +505,7 @@
         <figcaption>Bašta restorana</figcaption>
       </figure>
 
-      <figure class="shot reveal">
+      <figure class="shot reveal" data-kat="roletne komarnici">
         <button type="button" class="shot-btn" aria-label="Uvećaj: spoljne roletne i komarnici na kući">
           <img src="assets/images/roletne-komarnici-detalj.webp" width="1600" height="612" loading="lazy" decoding="async"
                alt="Detalj spoljnih roletni u antracit boji sa plise komarnicima na prozorima">
@@ -476,7 +513,7 @@
         <figcaption>Roletne i komarnici, antracit</figcaption>
       </figure>
 
-      <figure class="shot reveal">
+      <figure class="shot reveal" data-kat="tende">
         <button type="button" class="shot-btn" aria-label="Uvećaj: bele tende na balkonima stambene zgrade">
           <img src="assets/images/tende-balkoni-zgrada.webp" width="900" height="1840" loading="lazy" decoding="async"
                alt="Bele tende razapete iznad balkona stambene zgrade">
@@ -484,7 +521,7 @@
         <figcaption>Tende na balkonima</figcaption>
       </figure>
 
-      <figure class="shot reveal">
+      <figure class="shot reveal" data-kat="tende">
         <button type="button" class="shot-btn" aria-label="Uvećaj: montaža tende u toku">
           <img src="assets/images/montaza-tende-majstor.webp" width="1600" height="640" loading="lazy" decoding="async"
                alt="Majstor GAGI MONT-a podešava tek postavljenu tendu iznad dvorišne terase">
@@ -492,7 +529,7 @@
         <figcaption>Montaža u toku</figcaption>
       </figure>
 
-      <figure class="shot reveal">
+      <figure class="shot reveal" data-kat="zavese">
         <button type="button" class="shot-btn" aria-label="Uvećaj: zebra zavese u dnevnoj sobi">
           <img src="assets/images/zebra-zavese-enterijer.webp" width="900" height="1795" loading="lazy" decoding="async"
                alt="Bele zebra zavese na balkonskim vratima i prozoru u dnevnoj sobi">
@@ -500,7 +537,7 @@
         <figcaption>Zebra zavese</figcaption>
       </figure>
 
-      <figure class="shot reveal">
+      <figure class="shot reveal" data-kat="zavese">
         <button type="button" class="shot-btn" aria-label="Uvećaj: crne i terakota trakaste zavese u kozmetičkom salonu">
           <img src="assets/images/trakaste-zavese-salon.webp" width="1400" height="1048" loading="lazy" decoding="async"
                alt="Crne i terakota trakaste zavese na tri prozora kozmetičkog salona">
@@ -508,7 +545,7 @@
         <figcaption>Trakaste zavese u salonu</figcaption>
       </figure>
 
-      <figure class="shot reveal">
+      <figure class="shot reveal" data-kat="zavese">
         <button type="button" class="shot-btn" aria-label="Uvećaj: bež trakaste zavese na kancelarijskom prozoru">
           <img src="assets/images/trakaste-zavese-kancelarija.webp" width="1100" height="1100" loading="lazy" decoding="async"
                alt="Bež trakaste zavese koje filtriraju sunce na velikom kancelarijskom prozoru">
@@ -516,7 +553,7 @@
         <figcaption>Trakaste zavese, kancelarija</figcaption>
       </figure>
 
-      <figure class="shot reveal">
+      <figure class="shot reveal" data-kat="zavese">
         <button type="button" class="shot-btn" aria-label="Uvećaj: trakaste zavese na uglu poslovnog prostora">
           <img src="assets/images/trakaste-zavese-ugao.webp" width="1100" height="1100" loading="lazy" decoding="async"
                alt="Trakaste zavese na dva spojena prozora u uglu poslovnog prostora">
@@ -524,7 +561,7 @@
         <figcaption>Ugaona montaža</figcaption>
       </figure>
 
-      <figure class="shot reveal">
+      <figure class="shot reveal" data-kat="zavese">
         <button type="button" class="shot-btn" aria-label="Uvećaj: trakaste zavese u poslovnom prostoru">
           <img src="assets/images/trakaste-zavese-poslovni.webp" width="1100" height="1100" loading="lazy" decoding="async"
                alt="Bež trakaste zavese preko celog zida sa prozorima u poslovnom prostoru">
@@ -532,7 +569,7 @@
         <figcaption>Poslovni prostor</figcaption>
       </figure>
 
-      <figure class="shot reveal">
+      <figure class="shot reveal" data-kat="zavese">
         <button type="button" class="shot-btn" aria-label="Uvećaj: rolo zavese na staklenoj ulaznoj partiji">
           <img src="assets/images/rolo-zavese-ulaz.webp" width="1100" height="1100" loading="lazy" decoding="async"
                alt="Bele rolo zavese u crnim kasetama na staklenoj ulaznoj partiji poslovnog prostora">
@@ -540,7 +577,7 @@
         <figcaption>Rolo zavese na ulaznoj partiji</figcaption>
       </figure>
 
-      <figure class="shot reveal">
+      <figure class="shot reveal" data-kat="zavese">
         <button type="button" class="shot-btn" aria-label="Uvećaj: detalj kasete i vođice rolo zavese">
           <img src="assets/images/rolo-zavese-kaseta.webp" width="1100" height="1100" loading="lazy" decoding="async"
                alt="Detalj crne aluminijumske kasete i bočne vođice rolo zavese">
@@ -548,7 +585,7 @@
         <figcaption>Kaseta i vođice, detalj</figcaption>
       </figure>
 
-      <figure class="shot reveal">
+      <figure class="shot reveal" data-kat="zavese">
         <button type="button" class="shot-btn" aria-label="Uvećaj: rolo zavesa spuštena preko prozora">
           <img src="assets/images/rolo-zavese-prozor.webp" width="1100" height="1100" loading="lazy" decoding="async"
                alt="Bela rolo zavesa spuštena preko prozora sa crnim aluminijumskim ramom">
@@ -556,7 +593,7 @@
         <figcaption>Rolo zavesa na prozoru</figcaption>
       </figure>
 
-      <figure class="shot reveal">
+      <figure class="shot reveal" data-kat="zavese">
         <button type="button" class="shot-btn" aria-label="Uvećaj: struktura tkanine rolo zavese">
           <img src="assets/images/rolo-zavese-tekstura.webp" width="1100" height="1100" loading="lazy" decoding="async"
                alt="Krupan plan rolo zavese od tkanine sa uzdužnom strukturom u bež tonu">
@@ -564,7 +601,7 @@
         <figcaption>Struktura tkanine</figcaption>
       </figure>
 
-      <figure class="shot reveal">
+      <figure class="shot reveal" data-kat="zavese">
         <button type="button" class="shot-btn" aria-label="Uvećaj: rolo zavese u kancelariji">
           <img src="assets/images/rolo-zavese-kancelarija.webp" width="1100" height="1100" loading="lazy" decoding="async"
                alt="Rolo zavese na prozoru kancelarije sa radnim stolom">
@@ -572,7 +609,7 @@
         <figcaption>Kancelarija</figcaption>
       </figure>
 
-      <figure class="shot reveal">
+      <figure class="shot reveal" data-kat="garazna">
         <button type="button" class="shot-btn" aria-label="Uvećaj: antracit rolo garažna vrata">
           <img src="assets/images/rolo-garazna-vrata-antracit.webp" width="900" height="1216" loading="lazy" decoding="async"
                alt="Rolo garažna vrata u antracit boji sa kasetom iznad ulaza u garažu porodične kuće">
@@ -580,7 +617,7 @@
         <figcaption>Rolo garažna vrata, antracit</figcaption>
       </figure>
 
-      <figure class="shot reveal">
+      <figure class="shot reveal" data-kat="garazna">
         <button type="button" class="shot-btn" aria-label="Uvećaj: bela rolo garažna vrata ispod terase">
           <img src="assets/images/rolo-garazna-vrata-bela.webp" width="900" height="1433" loading="lazy" decoding="async"
                alt="Bela rolo garažna vrata ispod natkrivene terase, sa rolo zavesom na terasi iznad">
@@ -588,7 +625,7 @@
         <figcaption>Garažna vrata ispod terase</figcaption>
       </figure>
 
-      <figure class="shot reveal">
+      <figure class="shot reveal" data-kat="harmonika">
         <button type="button" class="shot-btn" aria-label="Uvećaj: harmonika vrata u dekoru drveta">
           <img src="assets/images/harmonika-vrata-drvo-igraonica.webp" width="800" height="1079" loading="lazy" decoding="async"
                alt="Dvokrilna harmonika vrata u dekoru drveta kao pregrada između dve prostorije">
@@ -596,7 +633,7 @@
         <figcaption>Harmonika vrata, dekor drveta</figcaption>
       </figure>
 
-      <figure class="shot reveal">
+      <figure class="shot reveal" data-kat="harmonika">
         <button type="button" class="shot-btn" aria-label="Uvećaj: bela harmonika vrata u dnevnoj sobi">
           <img src="assets/images/harmonika-vrata-bela.webp" width="800" height="1079" loading="lazy" decoding="async"
                alt="Bela harmonika vrata delimično otvorena, kao pregrada prema kuhinji">
@@ -604,7 +641,7 @@
         <figcaption>Bela harmonika vrata</figcaption>
       </figure>
 
-      <figure class="shot reveal">
+      <figure class="shot reveal" data-kat="harmonika">
         <button type="button" class="shot-btn" aria-label="Uvećaj: harmonika vrata u hodniku">
           <img src="assets/images/harmonika-vrata-drvo-hodnik.webp" width="900" height="899" loading="lazy" decoding="async"
                alt="Harmonika vrata u dekoru drveta ugrađena u prolaz između hodnika i sobe">
@@ -612,7 +649,7 @@
         <figcaption>Harmonika vrata u hodniku</figcaption>
       </figure>
 
-      <figure class="shot reveal">
+      <figure class="shot reveal" data-kat="harmonika">
         <button type="button" class="shot-btn" aria-label="Uvećaj: harmonika vrata zatvorena i otvorena">
           <img src="assets/images/harmonika-vrata-kuhinja.webp" width="900" height="899" loading="lazy" decoding="async"
                alt="Iste bele harmonika vrata prikazane zatvorene i otvorene, na prolazu prema kuhinji">
@@ -620,7 +657,7 @@
         <figcaption>Zatvorena i otvorena</figcaption>
       </figure>
 
-      <figure class="shot reveal">
+      <figure class="shot reveal" data-kat="zavese">
         <button type="button" class="shot-btn" aria-label="Uvećaj: zelene trakaste zavese">
           <img src="assets/images/trakaste-zavese-zelene.webp" width="1300" height="973" loading="lazy" decoding="async"
                alt="Zelene trakaste zavese preko celog prozorskog zida u praznoj prostoriji">
@@ -628,7 +665,7 @@
         <figcaption>Zelene trakaste zavese</figcaption>
       </figure>
 
-      <figure class="shot reveal">
+      <figure class="shot reveal" data-kat="zavese">
         <button type="button" class="shot-btn" aria-label="Uvećaj: zebra zavese na balkonskim vratima">
           <img src="assets/images/zebra-zavese-balkonska-vrata.webp" width="1000" height="2165" loading="lazy" decoding="async"
                alt="Zebra zavese u ljubičasto-beloj kombinaciji na prozoru i balkonskim vratima">
@@ -636,7 +673,7 @@
         <figcaption>Zebra zavese na balkonskim vratima</figcaption>
       </figure>
 
-      <figure class="shot reveal">
+      <figure class="shot reveal" data-kat="zavese">
         <button type="button" class="shot-btn" aria-label="Uvećaj: zebra zavese u trpezariji">
           <img src="assets/images/zebra-zavese-trpezarija.webp" width="1000" height="1778" loading="lazy" decoding="async"
                alt="Bež zebra zavesa na prozoru iznad trpezarijskog stola">
@@ -644,7 +681,7 @@
         <figcaption>Zebra zavese, trpezarija</figcaption>
       </figure>
 
-      <figure class="shot reveal">
+      <figure class="shot reveal" data-kat="zavese">
         <button type="button" class="shot-btn" aria-label="Uvećaj: zebra zavese u spavaćoj sobi">
           <img src="assets/images/zebra-zavese-spavaca.webp" width="1000" height="1778" loading="lazy" decoding="async"
                alt="Bež zebra zavesa delimično spuštena na prozoru spavaće sobe">
@@ -652,7 +689,7 @@
         <figcaption>Zebra zavese u spavaćoj sobi</figcaption>
       </figure>
 
-      <figure class="shot reveal">
+      <figure class="shot reveal" data-kat="zavese">
         <button type="button" class="shot-btn" aria-label="Uvećaj: zebra zavese u kuhinji">
           <img src="assets/images/zebra-zavese-kuhinja.webp" width="1000" height="1778" loading="lazy" decoding="async"
                alt="Bež zebra zavesa na kuhinjskom prozoru sa pogledom na brdo">
@@ -660,7 +697,7 @@
         <figcaption>Zebra zavese, kuhinja</figcaption>
       </figure>
 
-      <figure class="shot reveal">
+      <figure class="shot reveal" data-kat="roletne komarnici">
         <button type="button" class="shot-btn" aria-label="Uvećaj: roletne i komarnici na fasadi kuće">
           <img src="assets/images/roletne-komarnici-fasada.webp" width="1000" height="2165" loading="lazy" decoding="async"
                alt="Antracit roletne i plise komarnik na ulaznim vratima i prozoru porodične kuće">
@@ -668,7 +705,7 @@
         <figcaption>Roletne i komarnici na kući</figcaption>
       </figure>
 
-      <figure class="shot reveal">
+      <figure class="shot reveal" data-kat="terasa">
         <button type="button" class="shot-btn" aria-label="Uvećaj: zatvorena terasa na kući sa kamenom fasadom">
           <img src="assets/images/zatvaranje-terase-kamena.webp" width="1200" height="1604" loading="lazy" decoding="async"
                alt="Zatvorena terasa kuće sa kamenom fasadom, sa vertikalnim pregradama i vođicama">
@@ -676,7 +713,7 @@
         <figcaption>Zatvorena terasa</figcaption>
       </figure>
 
-      <figure class="shot reveal">
+      <figure class="shot reveal" data-kat="zavese">
         <button type="button" class="shot-btn" aria-label="Uvećaj: detalj sive zebra zavese">
           <img src="assets/images/zebra-zavese-siva-detalj.webp" width="1200" height="1600" loading="lazy" decoding="async"
                alt="Krupan plan sivo-bele zebra zavese na balkonskim vratima">
@@ -684,7 +721,7 @@
         <figcaption>Zebra zavesa, detalj</figcaption>
       </figure>
 
-      <figure class="shot reveal">
+      <figure class="shot reveal" data-kat="roletne">
         <button type="button" class="shot-btn" aria-label="Uvećaj: bele roletne na nizu prozora">
           <img src="assets/images/bele-roletne-niz-prozora.webp" width="1400" height="1050" loading="lazy" decoding="async"
                alt="Bele roletne spuštene preko niza prozora na fasadi porodične kuće">
@@ -692,7 +729,7 @@
         <figcaption>Bele roletne, niz prozora</figcaption>
       </figure>
 
-      <figure class="shot reveal">
+      <figure class="shot reveal" data-kat="zavese">
         <button type="button" class="shot-btn" aria-label="Uvećaj: sive zebra zavese u dnevnoj sobi">
           <img src="assets/images/zebra-zavese-siva-soba.webp" width="901" height="1600" loading="lazy" decoding="async"
                alt="Sivo-bele zebra zavese na prozoru i balkonskim vratima dnevne sobe">
@@ -700,7 +737,7 @@
         <figcaption>Sive zebra zavese</figcaption>
       </figure>
 
-      <figure class="shot reveal">
+      <figure class="shot reveal" data-kat="terasa">
         <button type="button" class="shot-btn" aria-label="Uvećaj: zatvorena terasa, pogled iznutra">
           <img src="assets/images/zatvaranje-terase-iznutra.webp" width="782" height="1054" loading="lazy" decoding="async"
                alt="Pogled iznutra na zatvorenu terasu sa providnim rebrastim panelima">
@@ -708,7 +745,7 @@
         <figcaption>Zatvorena terasa, iznutra</figcaption>
       </figure>
 
-      <figure class="shot reveal">
+      <figure class="shot reveal" data-kat="tende">
         <button type="button" class="shot-btn" aria-label="Uvećaj: aluminijumska konstrukcija tende">
           <img src="assets/images/pergola-konstrukcija.webp" width="1600" height="636" loading="lazy" decoding="async"
                alt="Aluminijumska konstrukcija tende sa nosačima iznad popločane terase">
@@ -716,7 +753,7 @@
         <figcaption>Konstrukcija i nosači</figcaption>
       </figure>
 
-      <figure class="shot reveal">
+      <figure class="shot reveal" data-kat="roletne komarnici">
         <button type="button" class="shot-btn" aria-label="Uvećaj: spoljna roletna sa komarnikom na prozoru">
           <img src="assets/images/spoljne-roletne-komarnik.webp" width="900" height="1855" loading="lazy" decoding="async"
                alt="Spoljna roletna u antracit boji sa komarnikom na prozoru porodične kuće">
@@ -724,7 +761,7 @@
         <figcaption>Roletna sa komarnikom</figcaption>
       </figure>
 
-      <figure class="shot reveal">
+      <figure class="shot reveal" data-kat="tende">
         <button type="button" class="shot-btn" aria-label="Uvećaj: detalj nosača i platna tende">
           <img src="assets/images/tenda-nosaci-detalj.webp" width="1600" height="596" loading="lazy" decoding="async"
                alt="Detalj nosača tende pričvršćenih na fasadu i razapetog prugastog platna">
@@ -732,7 +769,7 @@
         <figcaption>Detalj montaže</figcaption>
       </figure>
 
-      <figure class="shot reveal">
+      <figure class="shot reveal" data-kat="terasa">
         <button type="button" class="shot-btn" aria-label="Uvećaj: zatvorene terase sa trakastim zavesama">
           <img src="assets/images/zatvaranje-terase-trakaste.webp" width="1000" height="1385" loading="lazy" decoding="async"
                alt="Zatvorene terase stambene zgrade sa vertikalnim trakastim zavesama">
@@ -740,7 +777,7 @@
         <figcaption>Zatvaranje terase</figcaption>
       </figure>
 
-      <figure class="shot reveal">
+      <figure class="shot reveal" data-kat="tende">
         <button type="button" class="shot-btn" aria-label="Uvećaj: bele tende na porodičnoj kući">
           <img src="assets/images/tende-porodicna-kuca.webp" width="1100" height="1393" loading="lazy" decoding="async"
                alt="Dve bele tende iznad balkona porodične kuće, sa spuštenim roletnama na prozorima">
@@ -748,7 +785,7 @@
         <figcaption>Tende na kući</figcaption>
       </figure>
 
-      <figure class="shot reveal">
+      <figure class="shot reveal" data-kat="komarnici">
         <button type="button" class="shot-btn" aria-label="Uvećaj: plise komarnik na ulaznim vratima">
           <img src="assets/images/komarnik-plise-vrata.webp" width="900" height="1840" loading="lazy" decoding="async"
                alt="Plise komarnik na ulaznim vratima i rolo komarnik na prozoru u antracit boji">
