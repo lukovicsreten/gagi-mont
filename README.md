@@ -189,10 +189,14 @@ koja nije Gmail, obriši taj deo u `main.js` (odeljak 9) i ostaće čist `mailto
 
 ## 6. Pre nego što ide uživo (checklist)
 
-* [ ] Zameni `https://www.gagimont.rs/` stvarnim domenom — u `index.html`
-      (canonical, Open Graph, JSON-LD), u svakoj generisanoj podstranici
-      (menja se u `build-pages.mjs`, konstanta `DOMEN`, pa `node build-pages.mjs`),
-      u `robots.txt` i u `sitemap.xml`.
+* [x] ~~Upiši stvarni domen~~ — urađeno 11.09.2026, sajt je na
+      `https://www.gagi-mont.rs`. Domen je registrovan kod **unlimited.rs**, a
+      nameserveri su prebačeni na `ns1.vercel-dns.com` / `ns2.vercel-dns.com`,
+      pa DNS-om upravlja Vercel. Ako ikad zatreba mejl tipa `info@gagi-mont.rs`,
+      MX zapisi se dodaju u Vercel DNS-u, ne kod unlimited-a.
+      Ako se domen menja: `index.html` (canonical, Open Graph, JSON-LD),
+      `build-pages.mjs` (konstanta `DOMEN`, pa `node build-pages.mjs`),
+      `robots.txt` i `sitemap.xml`.
 * [ ] **Potvrdi sa Draganom** dva odgovora u FAQ sekciji na početnoj
       (`index.html`, `id="faq"`) pre nego što ih posetioci pročitaju kao
       obećanje: da li je merenje na terenu zaista besplatno, i tačan rok

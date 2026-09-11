@@ -23,7 +23,7 @@
 
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 
-const DOMEN = 'https://www.gagimont.rs'; // TODO: zameni stvarnim domenom (isto kao u index.html)
+const DOMEN = 'https://www.gagi-mont.rs'; // mora biti isto kao canonical u index.html
 const TEL_PRIKAZ = '065/55-22-684';
 const TEL_HREF   = '+381655522684';
 const MAIL       = 'gaggimont@gmail.com';
@@ -228,7 +228,6 @@ function pageShell({ rel, lang = 'sr-Latn-RS', title, description, canonical, og
 <meta name="author" content="GAGI MONT">
 <meta name="robots" content="${robots}">
 <meta name="theme-color" content="#22262A">
-<!-- TODO: zameni ${DOMEN}/ stvarnim domenom sajta (isto kao u index.html). -->
 <link rel="canonical" href="${canonical}">
 
 <meta property="og:type" content="website">
