@@ -41,7 +41,7 @@ gagi-mont-sajt/
 ├─ robots.txt, sitemap.xml, netlify.toml
 └─ assets/
    ├─ css/style.css           ← kompletan dizajn
-   ├─ js/main.js              ← meni, galerija, animacije, forma
+   ├─ js/main.js              ← meni, galerija, filter, animacije, WhatsApp/Viber upit
    ├─ fonts/                  ← Archivo + Manrope (self-hostovani .woff2)
    ├─ favicon.svg, favicon.png, apple-touch-icon.png
    └─ images/                 ← sve fotografije (.webp) + og slika (.jpg)
@@ -96,20 +96,26 @@ U kodu su na tim mestima ostavljeni `TODO` komentari:
 
 ---
 
-## 4. Kontakt forma — mora se aktivirati
+## 4. Upit — WhatsApp i Viber
 
-Forma šalje preko **FormSubmit.co** (besplatno, ne traži backend).
+Nema forme ni servisa za slanje mejla. Posetilac napiše poruku u polje i bira
+aplikaciju:
 
-**Pri prvom slanju** FormSubmit šalje mejl za potvrdu na `gaggimont@gmail.com`.
-Dok se ne klikne link iz tog mejla, forma neće raditi. Znači: posle postavljanja
-sajta, pošalji jedan probni upit i potvrdi mejl.
+- **WhatsApp** — poruka se prosleđuje kroz sam link (`wa.me/381655522684?text=...`),
+  pa stiže već napisana. Radi i na telefonu i na računaru (WhatsApp Web).
+- **Viber** — `viber://chat?number=+381655522684` otvara razgovor sa brojem, ali
+  Viber **ne prima unapred upisan tekst** na taj način. Zato sajt poruku stavi u
+  ostavu (clipboard) i javi korisniku da je nalepi. Viber link radi samo ako je
+  aplikacija instalirana.
 
-Preporuka posle aktivacije: FormSubmit ti da **hešovani ključ** (npr.
-`https://formsubmit.co/ajax/a1b2c3...`). Zameni njime adresu u `action`
-atributu forme u `index.html` — tako mejl ne stoji otvoren u HTML-u i stiže
-manje spama.
+Broj je upisan na jednom mestu u `assets/js/main.js` (`var BROJ`) i u `href`
+atributima oba dugmeta u `index.html`. Ako se broj menja, promeni ga na sva tri.
 
-Ako slanje ne uspe, sajt sam ponudi telefon i `mailto:` link, pa upit ne propada.
+**Uslov:** broj 065/55-22-684 mora biti registrovan na WhatsApp-u, odnosno na
+Viberu. Ako nije, dugme otvori aplikaciju i javi da broj nije dostupan.
+
+Ispod dugmadi stoji i telefon, pa upit ne propada ni ako korisnik nema nijednu
+od te dve aplikacije.
 
 ---
 

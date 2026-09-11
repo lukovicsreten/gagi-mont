@@ -244,114 +244,65 @@
   var yearEl = $('#godina');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  /* ------------------------------- 8. Forma ------------------------------ */
+  /* ------------------- 8. Upit preko WhatsApp-a i Vibera ------------------ */
 
-  var form   = $('#kontaktForma');
-  var status = $('#formStatus');
-  var submit = $('#submitBtn');
+  var poruka   = $('#poruka');
+  var waBtn    = $('#waBtn');
+  var viberBtn = $('#viberBtn');
+  var status   = $('#formStatus');
 
-  function setError(input, message) {
-    var field = input.closest('.field');
-    field.classList.add('has-error');
-    input.setAttribute('aria-invalid', 'true');
-    if (!$('.err', field)) {
-      var p = document.createElement('span');
-      p.className = 'err';
-      p.textContent = message;
-      field.appendChild(p);
-    }
+  var BROJ  = '381655522684';
+  var VIBER = 'viber://chat?number=%2B' + BROJ;
+
+  function tekstPoruke() {
+    var v = poruka.value.trim();
+    return v ? 'Upit sa sajta GAGI MONT:\n\n' + v : '';
   }
 
-  function clearError(input) {
-    var field = input.closest('.field');
-    field.classList.remove('has-error');
-    input.removeAttribute('aria-invalid');
-    var err = $('.err', field);
-    if (err) err.remove();
+  function javi(vrsta, tekst) {
+    status.className = 'form-status' + (vrsta ? ' ' + vrsta : '');
+    status.textContent = tekst;
   }
 
-  function validate() {
-    var ok = true;
-    var first = null;
-
-    [
-      { el: $('#ime'),     msg: 'Upišite ime i prezime.',   test: function (v) { return v.length >= 2; } },
-      { el: $('#telefon'), msg: 'Upišite broj telefona.',   test: function (v) { return v.replace(/[^\d]/g, '').length >= 6; } },
-      { el: $('#poruka'),  msg: 'Napišite šta vam treba.',  test: function (v) { return v.length >= 5; } }
-    ].forEach(function (rule) {
-      clearError(rule.el);
-      if (!rule.test(rule.el.value.trim())) {
-        setError(rule.el, rule.msg);
-        ok = false;
-        if (!first) first = rule.el;
-      }
-    });
-
-    var mail = $('#email');
-    clearError(mail);
-    if (mail.value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(mail.value.trim())) {
-      setError(mail, 'Proverite e-mail adresu.');
-      ok = false;
-      if (!first) first = mail;
-    }
-
-    if (first) first.focus();
-    return ok;
-  }
-
-  $$('#kontaktForma input, #kontaktForma textarea').forEach(function (el) {
-    el.addEventListener('input', function () {
-      if (el.closest('.field') && el.closest('.field').classList.contains('has-error')) clearError(el);
-    });
-  });
-
-  form.addEventListener('submit', function (e) {
+  // WhatsApp prima tekst kroz sam link, pa ga sastavljamo na klik.
+  waBtn.addEventListener('click', function (e) {
     e.preventDefault();
-    status.textContent = '';
-    status.className = 'form-status';
-
-    if (!validate()) return;
-
-    var data = {};
-    new FormData(form).forEach(function (value, key) { data[key] = value; });
-
-    submit.disabled = true;
-    var label = submit.innerHTML;
-    submit.textContent = 'Šaljem…';
-
-    fetch(form.action, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify(data)
-    })
-      .then(function (res) { return res.ok ? res.json() : Promise.reject(res); })
-      .then(function () {
-        form.reset();
-        status.className = 'form-status ok';
-        status.textContent = 'Hvala! Upit je poslat — javljamo se u najkraćem roku.';
-      })
-      .catch(function () {
-        // Ako servis nije dostupan (ili forma još nije aktivirana),
-        // korisnika ne ostavljamo bez izlaza — otvaramo mejl klijent.
-        status.className = 'form-status bad';
-        status.innerHTML = 'Slanje trenutno nije uspelo. Pozovite nas na ' +
-          '<a href="tel:+381655522684">065/55-22-684</a> ili nam ' +
-          '<a href="' + mailtoFallback(data) + '">pošaljite e-mail</a>.';
-      })
-      .finally(function () {
-        submit.disabled = false;
-        submit.innerHTML = label;
-      });
+    var t = tekstPoruke();
+    javi('', '');
+    window.open('https://wa.me/' + BROJ + (t ? '?text=' + encodeURIComponent(t) : ''),
+                '_blank', 'noopener');
   });
 
-  function mailtoFallback(data) {
-    var body = 'Ime: ' + (data.Ime || '') +
-      '\nTelefon: ' + (data.Telefon || '') +
-      '\nE-mail: ' + (data.Email || '') +
-      '\n\n' + (data.Poruka || '');
-    return 'mailto:gaggimont@gmail.com?subject=' +
-      encodeURIComponent('Upit sa sajta GAGI MONT') +
-      '&body=' + encodeURIComponent(body);
+  // Viber ne ume da unapred popuni poruku kad otvara razgovor sa brojem,
+  // pa tekst stavljamo u ostavu da korisnik samo nalepi.
+  viberBtn.addEventListener('click', function (e) {
+    e.preventDefault();
+    var v = poruka.value.trim();
+    if (!v) { window.location.href = VIBER; return; }
+
+    uOstavu(v).then(function (uspelo) {
+      javi('ok', uspelo
+        ? 'Poruka je kopirana — samo je nalepite u Viber.'
+        : 'Otvaramo Viber — poruku prekopirajte iz polja iznad.');
+      window.setTimeout(function () { window.location.href = VIBER; }, 400);
+    });
+  });
+
+  function uOstavu(tekst) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      return navigator.clipboard.writeText(tekst).then(
+        function () { return true; },
+        function () { return false; }
+      );
+    }
+    try {
+      poruka.select();
+      var ok = document.execCommand('copy');
+      poruka.setSelectionRange(poruka.value.length, poruka.value.length);
+      return Promise.resolve(ok);
+    } catch (greska) {
+      return Promise.resolve(false);
+    }
   }
 
 })();

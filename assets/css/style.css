@@ -726,6 +726,15 @@ a.about-item:hover .about-more .ico { transform: translateX(4px); }
   font-size: .82rem; font-weight: 600; color: #C0392B;
 }
 
+/* Upit ide u WhatsApp ili Viber — bojama pratimo te aplikacije, da se
+   dugme prepozna i pre nego sto se procita natpis. */
+.upit-uvod { margin: 2px 0 14px; font-size: .92rem; color: var(--muted); }
+.upit-dugmad { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.upit-dugmad .btn { justify-content: center; padding-inline: 16px; }
+.btn-wa    { background: #25D366; color: #08331C; }
+.btn-wa:hover    { background: #1FB757; color: #06240F; }
+.btn-viber { background: #7360F2; color: #fff; }
+.btn-viber:hover { background: #6350E0; }
 .hp { position: absolute; left: -9999px; opacity: 0; height: 0; overflow: hidden; }
 
 .form-note { margin-top: 16px; font-size: .87rem; color: var(--muted); text-align: center; }
@@ -948,6 +957,7 @@ a.about-item:hover .about-more .ico { transform: translateX(4px); }
   /* Osam pilula na uskom ekranu — sitnije, da traka ne pojede pola ekrana. */
   .gal-filter { gap: 8px; }
   .filter-btn { font-size: .86rem; padding: 7px 13px; gap: 5px; }
+  .upit-dugmad { grid-template-columns: 1fr; }
   .field-row { grid-template-columns: 1fr; gap: 0; }
   .footer-grid { grid-template-columns: 1fr; }
   .footer-brand { grid-column: auto; }
