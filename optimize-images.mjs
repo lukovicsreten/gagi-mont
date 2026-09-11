@@ -42,6 +42,10 @@ const jobs = [
   { src: 'rolo-prozor.jpg',      out: 'rolo-zavese-prozor',      w: 1100, crop: NO_CROP },
   { src: 'rolo-tekstura.jpg',    out: 'rolo-zavese-tekstura',    w: 1100, crop: NO_CROP },
   { src: 'rolo-kancelarija.jpg', out: 'rolo-zavese-kancelarija', w: 1100, crop: NO_CROP },
+
+  // Rolo garazna vrata — uspravni kadrovi, secemo prazan asfalt/travu u dnu.
+  { src: 'garazna-bela.jpg',     out: 'rolo-garazna-vrata-bela',     w: 900, crop: { left: 0.02, right: 0.02, top: 0, bottom: 0.14 } },
+  { src: 'garazna-antracit.jpg', out: 'rolo-garazna-vrata-antracit', w: 900, crop: { left: 0, right: 0, top: 0.04, bottom: 0.20 } },
 ];
 
 function region(meta, crop) {
