@@ -1,0 +1,11 @@
+# Sajt je statican — build alati ne treba da idu na Vercel.
+# Bez ovoga bi prisustvo package.json pokrenulo npm install (sharp je velik).
+node_modules
+package.json
+package-lock.json
+optimize-images.mjs
+server.mjs
+netlify.toml
+.claude
+dodatne slike
+README.md

@@ -29,6 +29,12 @@ const jobs = [
   { src: '15.png', out: 'tenda-rasklopljena',          w: 1600, crop: LANDSCAPE_CROP },
   { src: '16.png', out: 'pergola-konstrukcija',        w: 1600, crop: LANDSCAPE_CROP },
   { src: '17.png', out: 'montaza-tende-majstor',       w: 1600, crop: LANDSCAPE_CROP },
+
+  // Trakaste zavese — fotografije sa terena, bez slajder-zjga pa ne treba crop.
+  { src: 'trakaste-salon.jpg',       out: 'trakaste-zavese-salon',       w: 1400, crop: NO_CROP },
+  { src: 'trakaste-kancelarija.jpg', out: 'trakaste-zavese-kancelarija', w: 1100, crop: NO_CROP },
+  { src: 'trakaste-ugao.jpg',        out: 'trakaste-zavese-ugao',        w: 1100, crop: NO_CROP },
+  { src: 'trakaste-poslovni.jpg',    out: 'trakaste-zavese-poslovni',    w: 1100, crop: NO_CROP },
 ];
 
 function region(meta, crop) {

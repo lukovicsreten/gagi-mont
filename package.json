@@ -1,0 +1,12 @@
+{
+  "name": "gagi-mont-sajt",
+  "private": true,
+  "description": "Jednostranicni sajt za GAGI MONT (montaza tendi, roletni i komarnika, Nis).",
+  "scripts": {
+    "slike": "node optimize-images.mjs",
+    "start": "node server.mjs"
+  },
+  "dependencies": {
+    "sharp": "^0.35.4"
+  }
+}
