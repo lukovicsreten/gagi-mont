@@ -396,7 +396,7 @@ const USLUGE = [
       ['zebra-zavese-enterijer', 'Bele zebra zavese na balkonskim vratima i prozoru u dnevnoj sobi'],
       ['trakaste-zavese-salon', 'Crne i terakota trakaste zavese u kozmetičkom salonu'],
       ['rolo-zavese-ulaz', 'Rolo zavese u crnim kasetama na staklenoj ulaznoj partiji'],
-      ['zebra-zavese-balkonska-vrata', 'Zebra zavese na balkonskim vratima i prozoru'],
+      ['rolo-zavese-poslovna-sala', 'Krem rolo zavese preko staklenog zida poslovne sale'],
     ],
     cta: ['Birate zavese za novi stan?', 'Pošaljite meru i sliku otvora — javljamo se sa predlogom i cenom.'],
   },

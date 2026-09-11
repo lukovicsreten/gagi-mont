@@ -71,6 +71,12 @@ const jobs = [
   { src: 'bele-roletne-niz.jpg',   out: 'bele-roletne-niz-prozora',      w: 1400, crop: NO_CROP },
   { src: 'zebra-siva-soba.jpg',    out: 'zebra-zavese-siva-soba',        w: 1200, crop: NO_CROP },
   { src: 'terasa-iznutra.jpg',     out: 'zatvaranje-terase-iznutra',     w: 1200, crop: NO_CROP },
+
+  // Rolo zavese u poslovnim prostorima — originali su kvadratni (2448/3472 px).
+  { src: 'rolo-sala-spustene.jpg',  out: 'rolo-zavese-poslovna-sala',     w: 1400, crop: NO_CROP },
+  { src: 'rolo-sala-podignute.jpg', out: 'rolo-zavese-sala-podignute',    w: 1400, crop: NO_CROP },
+  { src: 'rolo-kancelarija-siva.jpg', out: 'rolo-zavese-kancelarija-siva', w: 1300, crop: NO_CROP },
+  { src: 'rolo-prozor-krem.jpg',    out: 'rolo-zavese-prozor-krem',       w: 1200, crop: NO_CROP },
 ];
 
 async function orientedMeta(file) {
