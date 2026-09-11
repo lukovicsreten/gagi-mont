@@ -874,6 +874,116 @@ a.about-item:hover .about-more .ico { transform: translateX(4px); }
 .reveal[data-delay="4"] { transition-delay: .36s; }
 .reveal[data-delay="5"] { transition-delay: .45s; }
 
+/* -------------------------- CTA traka (banner) --------------------------- */
+/* Puna širina, akcentna boja — stavlja se između sekcija da razbije skrol i
+   ponudi akciju pre nego posetilac stigne do dna strane. */
+
+.cta-band { background: var(--accent); }
+.cta-band-inner {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: 26px;
+  padding-block: clamp(34px, 5vw, 52px);
+}
+.cta-band-text h2 {
+  font-family: var(--font-head); font-weight: 750;
+  font-size: clamp(1.35rem, 2.4vw, 1.9rem); letter-spacing: -.02em;
+  color: #fff; margin: 0 0 6px;
+}
+.cta-band-text p { margin: 0; color: rgba(255, 255, 255, .88); max-width: 46ch; }
+.cta-band-actions { display: flex; flex-wrap: wrap; gap: 12px; flex: none; }
+
+.btn-invert { background: #fff; color: var(--ink); }
+.btn-invert:hover { background: var(--ink-2); color: #fff; }
+
+.btn-outline {
+  background: transparent;
+  border-color: var(--line);
+  color: var(--ink);
+}
+.btn-outline:hover { border-color: var(--ink); background: var(--sand); }
+
+/* ------------------------------- Breadcrumb ------------------------------ */
+
+/* Header je position:fixed — prvi element na svakoj podstranici mora sam
+   sebi da napravi mesta za njega (na pocetnoj to radi .hero). */
+.breadcrumb { padding-top: calc(var(--header-h) + 22px); font-size: .87rem; color: var(--muted-2); }
+.breadcrumb a { color: var(--muted); }
+.breadcrumb a:hover { color: var(--accent); }
+.breadcrumb span[aria-current] { color: var(--ink-2); font-weight: 600; }
+
+/* ---------------------- Podstranice usluga i bloga ------------------------ */
+
+.page-hero { padding-top: clamp(30px, 5vw, 48px); }
+.page-banner {
+  border-radius: var(--radius-lg); overflow: hidden;
+  margin: clamp(20px, 3vw, 34px) 0 clamp(36px, 5vw, 56px);
+  box-shadow: var(--shadow-md);
+}
+.page-banner img { width: 100%; aspect-ratio: 16 / 7; object-fit: cover; display: block; }
+
+.page-sub {
+  font-size: clamp(1.25rem, 2vw, 1.55rem);
+  font-weight: 750; letter-spacing: -.02em;
+  margin: clamp(34px, 4vw, 50px) 0 18px;
+}
+
+.mini-gallery {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;
+  margin-bottom: 16px;
+}
+.mini-gallery a {
+  display: block; border-radius: var(--radius); overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+.mini-gallery img {
+  width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block;
+  transition: transform .45s var(--ease);
+}
+.mini-gallery a:hover img { transform: scale(1.06); }
+.mini-gallery-note { margin: 0 0 8px; }
+
+/* ------------------------------- Blog indeks ------------------------------ */
+
+.blog-grid {
+  display: grid; gap: 18px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+.blog-card {
+  background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-lg);
+  padding: 24px;
+}
+.blog-card-tag {
+  display: inline-block; font-family: var(--font-head); font-weight: 700;
+  font-size: .72rem; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--accent); background: var(--accent-3);
+  padding: 4px 10px; border-radius: 999px; margin-bottom: 12px;
+}
+.blog-card h2 { font-size: 1.1rem; margin: 0 0 8px; letter-spacing: -.01em; }
+.blog-card p { margin: 0; color: var(--muted); font-size: .93rem; }
+
+/* -------------------------------- 404 stranica ----------------------------- */
+
+/* 404 nema breadcrumb ispred sebe, pa mora sam da nadoknadi visinu fiksnog headera. */
+.notfound { padding-top: calc(var(--header-h) + 40px); padding-bottom: clamp(60px, 8vw, 100px); }
+
+/* --------------------------------- FAQ ------------------------------------ */
+
+.faq-list { max-width: 780px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+.faq-item {
+  border: 1px solid var(--line); border-radius: var(--radius);
+  background: var(--paper); overflow: hidden;
+}
+.faq-q {
+  width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  padding: 18px 22px; background: none; border: 0; cursor: pointer; text-align: left;
+  font-family: var(--font-head); font-weight: 650; font-size: 1.02rem; color: var(--ink);
+}
+.faq-q .ico { flex: none; color: var(--accent); transition: transform .25s var(--ease); }
+.faq-item.is-open .faq-q .ico { transform: rotate(45deg); }
+.faq-a { padding: 0 22px 20px; color: var(--muted); max-width: 68ch; }
+.faq-a p { margin: 0; }
+.faq-note { max-width: 780px; margin: 26px auto 0; text-align: center; color: var(--muted); font-size: .92rem; }
+
 /* ------------------------------ Responsive ------------------------------ */
 
 @media (max-width: 1040px) {
@@ -889,6 +999,7 @@ a.about-item:hover .about-more .ico { transform: translateX(4px); }
   .gallery { columns: 2; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
   .footer-brand { grid-column: span 2; }
+  .mini-gallery { grid-template-columns: repeat(3, 1fr); }
 }
 
 @media (max-width: 860px) {
@@ -946,6 +1057,13 @@ a.about-item:hover .about-more .ico { transform: translateX(4px); }
   body { padding-bottom: 76px; }
 
   .lb-nav { width: 44px; height: 44px; font-size: 1.6rem; }
+
+  .cta-band-inner { justify-content: center; text-align: center; }
+  .cta-band-text { width: 100%; }
+  .cta-band-text p { max-width: none; margin-inline: auto; }
+  .cta-band-actions { width: 100%; justify-content: center; }
+
+  .mini-gallery { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 560px) {
@@ -964,6 +1082,11 @@ a.about-item:hover .about-more .ico { transform: translateX(4px); }
   .hero-cta .btn { width: 100%; justify-content: center; }
   .why-list li { grid-template-columns: 40px 1fr; gap: 14px; }
   .lb-figure img { max-height: calc(100svh - 200px); }
+
+  .cta-band-actions { flex-direction: column; }
+  .cta-band-actions .btn { width: 100%; justify-content: center; }
+  .mini-gallery { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .blog-grid { grid-template-columns: 1fr; }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -39,8 +39,16 @@ http.createServer((req, res) => {
     file = path.join(file, 'index.html');
   }
   if (!fs.existsSync(file)) {
-    res.writeHead(404, { 'Content-Type': 'text/html; charset=utf-8' })
-       .end('<h1>404</h1><p>Stranica nije pronađena.</p>');
+    // Isto ponašanje kao na Vercelu: nepostojeća putanja dobija 404.html sa
+    // korena sajta (Vercel to radi automatski za staticke sajtove).
+    const custom404 = path.join(ROOT, '404.html');
+    if (fs.existsSync(custom404)) {
+      res.writeHead(404, { 'Content-Type': 'text/html; charset=utf-8' });
+      fs.createReadStream(custom404).pipe(res);
+    } else {
+      res.writeHead(404, { 'Content-Type': 'text/html; charset=utf-8' })
+         .end('<h1>404</h1><p>Stranica nije pronađena.</p>');
+    }
     return;
   }
 

@@ -1,6 +1,11 @@
 /* =========================================================================
    GAGI MONT — assets/js/main.js
    Bez zavisnosti. Sve je progresivno: ako JS ne radi, sajt i dalje radi.
+
+   Deli se izmedju pocetne strane i podstranica usluga/bloga/404 — one nemaju
+   svaki deo markupa (galerija, lightbox, WhatsApp/Viber blok), pa je svaka
+   celina ispod uslovljena postojanjem svog korenskog elementa. Header, meni
+   i FAB ocekujemo na svakoj stranici i njih ne uslovljavamo.
    ========================================================================= */
 (function () {
   'use strict';
@@ -15,48 +20,59 @@
   var header = $('#siteHeader');
   var fab    = $('.fab');
 
-  function onScroll() {
-    var y = window.scrollY || window.pageYOffset;
-    header.classList.toggle('is-stuck', y > 40);
-    if (fab) fab.classList.toggle('is-on', y > 420);
+  if (header) {
+    (function () {
+      function onScroll() {
+        var y = window.scrollY || window.pageYOffset;
+        header.classList.toggle('is-stuck', y > 40);
+        if (fab) fab.classList.toggle('is-on', y > 420);
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    })();
   }
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
 
   /* --------------------------- 2. Mobilni meni --------------------------- */
 
   var burger = $('#burger');
   var nav    = $('#nav');
 
-  function setMenu(open) {
-    nav.classList.toggle('is-open', open);
-    burger.setAttribute('aria-expanded', String(open));
-    burger.setAttribute('aria-label', open ? 'Zatvori meni' : 'Otvori meni');
+  if (burger && nav) {
+    (function () {
+      function setMenu(open) {
+        nav.classList.toggle('is-open', open);
+        burger.setAttribute('aria-expanded', String(open));
+        burger.setAttribute('aria-label', open ? 'Zatvori meni' : 'Otvori meni');
+      }
+
+      burger.addEventListener('click', function () {
+        setMenu(burger.getAttribute('aria-expanded') !== 'true');
+      });
+
+      nav.addEventListener('click', function (e) {
+        if (e.target.closest('a')) setMenu(false);
+      });
+
+      document.addEventListener('click', function (e) {
+        if (nav.classList.contains('is-open') &&
+            !e.target.closest('#nav') && !e.target.closest('#burger')) {
+          setMenu(false);
+        }
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && nav.classList.contains('is-open')) {
+          setMenu(false);
+          burger.focus();
+        }
+      });
+    })();
   }
 
-  burger.addEventListener('click', function () {
-    setMenu(burger.getAttribute('aria-expanded') !== 'true');
-  });
-
-  nav.addEventListener('click', function (e) {
-    if (e.target.closest('a')) setMenu(false);
-  });
-
-  document.addEventListener('click', function (e) {
-    if (nav.classList.contains('is-open') &&
-        !e.target.closest('#nav') && !e.target.closest('#burger')) {
-      setMenu(false);
-    }
-  });
-
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' && nav.classList.contains('is-open')) {
-      setMenu(false);
-      burger.focus();
-    }
-  });
-
   /* --------------------- 3. Aktivna stavka u meniju ---------------------- */
+  /* Radi samo za linkove ka sidrima na istoj strani (#usluge...). Na
+     podstranicama meni vodi nazad na pocetnu (index.html#usluge), pa ovaj
+     deo prirodno ne nadje nijedan sidreni link i preskace se. */
 
   var navLinks = $$('#nav > ul a[href^="#"]');
   var sections = navLinks
@@ -94,142 +110,149 @@
     revealables.forEach(function (el) { revealer.observe(el); });
   }
 
-  /* ------------------------------ 5. Lightbox ---------------------------- */
+  /* ------------------- 5. Galerija, filter i lightbox --------------------
+     Postoje samo na pocetnoj strani. Sve je u jednom bloku jer filter i
+     lightbox dele istu listu "shots". */
 
-  var lb        = $('#lightbox');
-  var lbImg     = $('#lbImg');
-  var lbCaption = $('#lbCaption');
-  var shots     = $$('#gallery .shot');
-  var vidljive  = shots.slice();   // podskup koji filter trenutno prikazuje
-  var current   = 0;
-  var lastFocus = null;
+  var lb = $('#lightbox');
 
-  function osveziVidljive() {
-    vidljive = shots.filter(function (fig) { return !fig.hidden; });
+  if (lb) {
+    (function () {
+      var lbImg     = $('#lbImg');
+      var lbCaption = $('#lbCaption');
+      var shots     = $$('#gallery .shot');
+      var vidljive  = shots.slice();   // podskup koji filter trenutno prikazuje
+      var current   = 0;
+      var lastFocus = null;
+
+      function osveziVidljive() {
+        vidljive = shots.filter(function (fig) { return !fig.hidden; });
+      }
+
+      function show(index) {
+        if (!vidljive.length) return;
+        current = (index + vidljive.length) % vidljive.length;
+        var fig = vidljive[current];
+        var img = $('img', fig);
+        var cap = $('figcaption', fig);
+
+        lbImg.src = img.currentSrc || img.src;
+        lbImg.alt = img.alt;
+        lbCaption.textContent = cap ? cap.textContent : '';
+      }
+
+      function openLightbox(index) {
+        lastFocus = document.activeElement;
+        show(index);
+        lb.hidden = false;
+        document.documentElement.style.overflow = 'hidden';
+        requestAnimationFrame(function () { lb.classList.add('is-open'); });
+        $('#lbClose').focus();
+      }
+
+      function closeLightbox() {
+        lb.classList.remove('is-open');
+        document.documentElement.style.overflow = '';
+        window.setTimeout(function () {
+          lb.hidden = true;
+          lbImg.removeAttribute('src');
+        }, reduceMotion ? 0 : 250);
+        if (lastFocus) lastFocus.focus();
+      }
+
+      shots.forEach(function (fig) {
+        $('.shot-btn', fig).addEventListener('click', function () {
+          osveziVidljive();
+          openLightbox(vidljive.indexOf(fig));
+        });
+      });
+
+      /* ------------------- 5b. Filter galerije po usluzi ------------------ */
+
+      var filterBtns = $$('.filter-btn');
+      var galPrazno  = $('#galPrazno');
+
+      function kategorijeOd(fig) {
+        return (fig.getAttribute('data-kat') || '').split(' ');
+      }
+
+      // Brojevi pored naziva se racunaju iz same galerije, da ne zastare.
+      filterBtns.forEach(function (btn) {
+        var kat = btn.getAttribute('data-kat');
+        var n = kat === 'sve'
+          ? shots.length
+          : shots.filter(function (fig) { return kategorijeOd(fig).indexOf(kat) !== -1; }).length;
+        $('.filter-n', btn).textContent = n;
+        btn.hidden = n === 0;
+      });
+
+      function primeniFilter(kat, pomeriUrl) {
+        if (!filterBtns.some(function (b) { return b.getAttribute('data-kat') === kat; })) kat = 'sve';
+
+        shots.forEach(function (fig) {
+          var prikazi = kat === 'sve' || kategorijeOd(fig).indexOf(kat) !== -1;
+          fig.hidden = !prikazi;
+          // Slike koje observer nije stigao da otkrije ostale bi providne.
+          if (prikazi) fig.classList.add('is-in');
+        });
+
+        filterBtns.forEach(function (btn) {
+          var on = btn.getAttribute('data-kat') === kat;
+          btn.classList.toggle('is-on', on);
+          btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+        });
+
+        osveziVidljive();
+        if (galPrazno) galPrazno.hidden = vidljive.length > 0;
+
+        if (pomeriUrl && window.history && history.replaceState) {
+          history.replaceState(null, '',
+            location.pathname + (kat === 'sve' ? '' : '?usluga=' + kat) + '#galerija');
+        }
+      }
+
+      filterBtns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          primeniFilter(btn.getAttribute('data-kat'), true);
+        });
+      });
+
+      // Kartice u "O nama" vode na galeriju vec filtriranu na tu uslugu.
+      $$('.about-item[data-kat]').forEach(function (kartica) {
+        kartica.addEventListener('click', function () {
+          primeniFilter(kartica.getAttribute('data-kat'), true);
+        });
+      });
+
+      // Deljiv link oblika ...?usluga=zavese#galerija
+      var izUrl = /[?&]usluga=([a-z]+)/.exec(location.search);
+      if (izUrl) primeniFilter(izUrl[1], false);
+
+      $('#lbClose').addEventListener('click', closeLightbox);
+      $('#lbPrev').addEventListener('click', function () { show(current - 1); });
+      $('#lbNext').addEventListener('click', function () { show(current + 1); });
+
+      lb.addEventListener('click', function (e) {
+        // Klik na pozadinu (a ne na sliku ili dugmad) zatvara.
+        if (e.target === lb || e.target.classList.contains('lb-figure')) closeLightbox();
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (lb.hidden) return;
+        if (e.key === 'Escape')     { closeLightbox(); }
+        if (e.key === 'ArrowLeft')  { show(current - 1); }
+        if (e.key === 'ArrowRight') { show(current + 1); }
+        if (e.key === 'Tab') {
+          // Fokus ostaje u dijalogu.
+          var focusables = $$('button', lb);
+          var first = focusables[0];
+          var last  = focusables[focusables.length - 1];
+          if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+          else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+        }
+      });
+    })();
   }
-
-  function show(index) {
-    if (!vidljive.length) return;
-    current = (index + vidljive.length) % vidljive.length;
-    var fig = vidljive[current];
-    var img = $('img', fig);
-    var cap = $('figcaption', fig);
-
-    lbImg.src = img.currentSrc || img.src;
-    lbImg.alt = img.alt;
-    lbCaption.textContent = cap ? cap.textContent : '';
-  }
-
-  function openLightbox(index) {
-    lastFocus = document.activeElement;
-    show(index);
-    lb.hidden = false;
-    document.documentElement.style.overflow = 'hidden';
-    requestAnimationFrame(function () { lb.classList.add('is-open'); });
-    $('#lbClose').focus();
-  }
-
-  function closeLightbox() {
-    lb.classList.remove('is-open');
-    document.documentElement.style.overflow = '';
-    window.setTimeout(function () {
-      lb.hidden = true;
-      lbImg.removeAttribute('src');
-    }, reduceMotion ? 0 : 250);
-    if (lastFocus) lastFocus.focus();
-  }
-
-  shots.forEach(function (fig) {
-    $('.shot-btn', fig).addEventListener('click', function () {
-      osveziVidljive();
-      openLightbox(vidljive.indexOf(fig));
-    });
-  });
-
-  /* --------------------- 5b. Filter galerije po usluzi -------------------- */
-
-  var filterBtns = $$('.filter-btn');
-  var galPrazno  = $('#galPrazno');
-
-  function kategorijeOd(fig) {
-    return (fig.getAttribute('data-kat') || '').split(' ');
-  }
-
-  // Brojevi pored naziva se racunaju iz same galerije, da ne zastare.
-  filterBtns.forEach(function (btn) {
-    var kat = btn.getAttribute('data-kat');
-    var n = kat === 'sve'
-      ? shots.length
-      : shots.filter(function (fig) { return kategorijeOd(fig).indexOf(kat) !== -1; }).length;
-    $('.filter-n', btn).textContent = n;
-    btn.hidden = n === 0;
-  });
-
-  function primeniFilter(kat, pomeriUrl) {
-    if (!filterBtns.some(function (b) { return b.getAttribute('data-kat') === kat; })) kat = 'sve';
-
-    shots.forEach(function (fig) {
-      var prikazi = kat === 'sve' || kategorijeOd(fig).indexOf(kat) !== -1;
-      fig.hidden = !prikazi;
-      // Slike koje observer nije stigao da otkrije ostale bi providne.
-      if (prikazi) fig.classList.add('is-in');
-    });
-
-    filterBtns.forEach(function (btn) {
-      var on = btn.getAttribute('data-kat') === kat;
-      btn.classList.toggle('is-on', on);
-      btn.setAttribute('aria-pressed', on ? 'true' : 'false');
-    });
-
-    osveziVidljive();
-    galPrazno.hidden = vidljive.length > 0;
-
-    if (pomeriUrl && window.history && history.replaceState) {
-      history.replaceState(null, '',
-        location.pathname + (kat === 'sve' ? '' : '?usluga=' + kat) + '#galerija');
-    }
-  }
-
-  filterBtns.forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      primeniFilter(btn.getAttribute('data-kat'), true);
-    });
-  });
-
-  // Kartice u "O nama" vode na galeriju vec filtriranu na tu uslugu.
-  $$('.about-item[data-kat]').forEach(function (kartica) {
-    kartica.addEventListener('click', function () {
-      primeniFilter(kartica.getAttribute('data-kat'), true);
-    });
-  });
-
-  // Deljiv link oblika ...?usluga=zavese#galerija
-  var izUrl = /[?&]usluga=([a-z]+)/.exec(location.search);
-  if (izUrl) primeniFilter(izUrl[1], false);
-
-  $('#lbClose').addEventListener('click', closeLightbox);
-  $('#lbPrev').addEventListener('click', function () { show(current - 1); });
-  $('#lbNext').addEventListener('click', function () { show(current + 1); });
-
-  lb.addEventListener('click', function (e) {
-    // Klik na pozadinu (a ne na sliku ili dugmad) zatvara.
-    if (e.target === lb || e.target.classList.contains('lb-figure')) closeLightbox();
-  });
-
-  document.addEventListener('keydown', function (e) {
-    if (lb.hidden) return;
-    if (e.key === 'Escape')     { closeLightbox(); }
-    if (e.key === 'ArrowLeft')  { show(current - 1); }
-    if (e.key === 'ArrowRight') { show(current + 1); }
-    if (e.key === 'Tab') {
-      // Fokus ostaje u dijalogu.
-      var focusables = $$('button', lb);
-      var first = focusables[0];
-      var last  = focusables[focusables.length - 1];
-      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
-      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
-    }
-  });
 
   /* ------------------- 6. "Danas" u tabeli radnog vremena ---------------- */
 
@@ -244,65 +267,70 @@
   var yearEl = $('#godina');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  /* ------------------- 8. Upit preko WhatsApp-a i Vibera ------------------ */
+  /* ------------------- 8. Upit preko WhatsApp-a i Vibera ------------------
+     Postoji na pocetnoj i na podstranicama usluga — ne na /blog ni na 404. */
 
   var poruka   = $('#poruka');
   var waBtn    = $('#waBtn');
   var viberBtn = $('#viberBtn');
   var status   = $('#formStatus');
 
-  var BROJ  = '381655522684';
-  var VIBER = 'viber://chat?number=%2B' + BROJ;
+  if (poruka && waBtn && viberBtn && status) {
+    (function () {
+      var BROJ  = '381655522684';
+      var VIBER = 'viber://chat?number=%2B' + BROJ;
 
-  function tekstPoruke() {
-    var v = poruka.value.trim();
-    return v ? 'Upit sa sajta GAGI MONT:\n\n' + v : '';
-  }
+      function tekstPoruke() {
+        var v = poruka.value.trim();
+        return v ? 'Upit sa sajta GAGI MONT:\n\n' + v : '';
+      }
 
-  function javi(vrsta, tekst) {
-    status.className = 'form-status' + (vrsta ? ' ' + vrsta : '');
-    status.textContent = tekst;
-  }
+      function javi(vrsta, tekst) {
+        status.className = 'form-status' + (vrsta ? ' ' + vrsta : '');
+        status.textContent = tekst;
+      }
 
-  // WhatsApp prima tekst kroz sam link, pa ga sastavljamo na klik.
-  waBtn.addEventListener('click', function (e) {
-    e.preventDefault();
-    var t = tekstPoruke();
-    javi('', '');
-    window.open('https://wa.me/' + BROJ + (t ? '?text=' + encodeURIComponent(t) : ''),
-                '_blank', 'noopener');
-  });
+      // WhatsApp prima tekst kroz sam link, pa ga sastavljamo na klik.
+      waBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        var t = tekstPoruke();
+        javi('', '');
+        window.open('https://wa.me/' + BROJ + (t ? '?text=' + encodeURIComponent(t) : ''),
+                    '_blank', 'noopener');
+      });
 
-  // Viber ne ume da unapred popuni poruku kad otvara razgovor sa brojem,
-  // pa tekst stavljamo u ostavu da korisnik samo nalepi.
-  viberBtn.addEventListener('click', function (e) {
-    e.preventDefault();
-    var v = poruka.value.trim();
-    if (!v) { window.location.href = VIBER; return; }
+      // Viber ne ume da unapred popuni poruku kad otvara razgovor sa brojem,
+      // pa tekst stavljamo u ostavu da korisnik samo nalepi.
+      viberBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        var v = poruka.value.trim();
+        if (!v) { window.location.href = VIBER; return; }
 
-    uOstavu(v).then(function (uspelo) {
-      javi('ok', uspelo
-        ? 'Poruka je kopirana — samo je nalepite u Viber.'
-        : 'Otvaramo Viber — poruku prekopirajte iz polja iznad.');
-      window.setTimeout(function () { window.location.href = VIBER; }, 400);
-    });
-  });
+        uOstavu(v).then(function (uspelo) {
+          javi('ok', uspelo
+            ? 'Poruka je kopirana — samo je nalepite u Viber.'
+            : 'Otvaramo Viber — poruku prekopirajte iz polja iznad.');
+          window.setTimeout(function () { window.location.href = VIBER; }, 400);
+        });
+      });
 
-  function uOstavu(tekst) {
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      return navigator.clipboard.writeText(tekst).then(
-        function () { return true; },
-        function () { return false; }
-      );
-    }
-    try {
-      poruka.select();
-      var ok = document.execCommand('copy');
-      poruka.setSelectionRange(poruka.value.length, poruka.value.length);
-      return Promise.resolve(ok);
-    } catch (greska) {
-      return Promise.resolve(false);
-    }
+      function uOstavu(tekst) {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          return navigator.clipboard.writeText(tekst).then(
+            function () { return true; },
+            function () { return false; }
+          );
+        }
+        try {
+          poruka.select();
+          var ok = document.execCommand('copy');
+          poruka.setSelectionRange(poruka.value.length, poruka.value.length);
+          return Promise.resolve(ok);
+        } catch (greska) {
+          return Promise.resolve(false);
+        }
+      }
+    })();
   }
 
   /* ----------------- 9. E-mail: klik uvek negde odvede ------------------- */
@@ -327,6 +355,19 @@
         '&su=' + encodeURIComponent(NASLOV),
         '_blank', 'noopener'
       );
+    });
+  });
+
+  /* --------------- 10. FAQ akordeon (samo gde postoji #faq) -------------- */
+
+  $$('.faq-item').forEach(function (item) {
+    var dugme = $('.faq-q', item);
+    var panel = $('.faq-a', item);
+    if (!dugme || !panel) return;
+    dugme.addEventListener('click', function () {
+      var otvoreno = item.classList.toggle('is-open');
+      dugme.setAttribute('aria-expanded', String(otvoreno));
+      panel.hidden = !otvoreno;
     });
   });
 
