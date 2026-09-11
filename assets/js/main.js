@@ -349,7 +349,7 @@
       '\nTelefon: ' + (data.Telefon || '') +
       '\nE-mail: ' + (data.Email || '') +
       '\n\n' + (data.Poruka || '');
-    return 'mailto:firma.co.rs@gmail.com?subject=' +
+    return 'mailto:gaggimont@gmail.com?subject=' +
       encodeURIComponent('Upit sa sajta GAGI MONT') +
       '&body=' + encodeURIComponent(body);
   }

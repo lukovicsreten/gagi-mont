@@ -100,7 +100,7 @@ U kodu su na tim mestima ostavljeni `TODO` komentari:
 
 Forma šalje preko **FormSubmit.co** (besplatno, ne traži backend).
 
-**Pri prvom slanju** FormSubmit šalje mejl za potvrdu na `firma.co.rs@gmail.com`.
+**Pri prvom slanju** FormSubmit šalje mejl za potvrdu na `gaggimont@gmail.com`.
 Dok se ne klikne link iz tog mejla, forma neće raditi. Znači: posle postavljanja
 sajta, pošalji jedan probni upit i potvrdi mejl.
 

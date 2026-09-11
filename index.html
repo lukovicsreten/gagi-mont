@@ -50,7 +50,7 @@
   "url": "https://www.gagimont.rs/",
   "image": "https://www.gagimont.rs/assets/images/og-gagi-mont.jpg",
   "telephone": "+381655522684",
-  "email": "firma.co.rs@gmail.com",
+  "email": "gaggimont@gmail.com",
   "priceRange": "$$",
   "address": {
     "@type": "PostalAddress",
@@ -63,6 +63,14 @@
     "@type": "GeoCoordinates",
     "latitude": 43.321318,
     "longitude": 21.904721
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "sales",
+    "name": "Dragan Paunović",
+    "telephone": "+381655522684",
+    "email": "gaggimont@gmail.com",
+    "availableLanguage": "sr"
   },
   "hasMap": "https://maps.app.goo.gl/ipAUyJNWsStb2r8a6",
   "areaServed": [
@@ -136,6 +144,9 @@
   <symbol id="i-servis" viewBox="0 0 32 32">
     <path d="M20.5 4.5a6.5 6.5 0 0 0-8.2 8.2L4 21l4 4 8.3-8.3a6.5 6.5 0 0 0 8.2-8.2l-3.9 3.9-3.5-.6-.6-3.5Z"/>
     <path d="M7.5 21.5 9 23"/>
+  </symbol>
+  <symbol id="i-osoba" viewBox="0 0 24 24">
+    <circle cx="12" cy="8" r="3.6"/><path d="M4.8 20.4a7.3 7.3 0 0 1 14.4 0"/>
   </symbol>
   <symbol id="i-telefon" viewBox="0 0 24 24">
     <path d="M6.6 3h3l1.5 4-2.2 1.6a12 12 0 0 0 6.5 6.5L17 12.9l4 1.5v3a2.5 2.5 0 0 1-2.8 2.5A16.5 16.5 0 0 1 4.1 5.8 2.5 2.5 0 0 1 6.6 3Z"/>
@@ -871,14 +882,19 @@
       <!-- Podaci -->
       <div class="contact-info reveal">
 
+        <div class="contact-row">
+          <svg class="ico ico-lg" aria-hidden="true"><use href="#i-osoba"/></svg>
+          <span><small>Kontakt osoba</small><strong>Dragan Paunović</strong></span>
+        </div>
+
         <a class="contact-row contact-row-link" href="tel:+381655522684">
           <svg class="ico ico-lg" aria-hidden="true"><use href="#i-telefon"/></svg>
           <span><small>Telefon</small><strong>065/55-22-684</strong></span>
         </a>
 
-        <a class="contact-row contact-row-link" href="mailto:firma.co.rs@gmail.com">
+        <a class="contact-row contact-row-link" href="mailto:gaggimont@gmail.com">
           <svg class="ico ico-lg" aria-hidden="true"><use href="#i-mail"/></svg>
-          <span><small>E-mail</small><strong>firma.co.rs@gmail.com</strong></span>
+          <span><small>E-mail</small><strong>gaggimont@gmail.com</strong></span>
         </a>
 
         <a class="contact-row contact-row-link" href="https://maps.app.goo.gl/ipAUyJNWsStb2r8a6"
@@ -908,13 +924,13 @@
       <div class="contact-form-wrap reveal" data-delay="1">
         <!--
           Forma šalje preko FormSubmit.co (bez backend-a).
-          PRVO SLANJE: FormSubmit šalje mejl za aktivaciju na firma.co.rs@gmail.com —
+          PRVO SLANJE: FormSubmit šalje mejl za aktivaciju na gaggimont@gmail.com —
           klikom na link u tom mejlu forma postaje aktivna.
           PREPORUKA: posle aktivacije zameni adresu u action-u hešovanim ključem
           koji FormSubmit pošalje, da mejl ne stoji otvoren u HTML-u (manje spama).
         -->
         <form id="kontaktForma"
-              action="https://formsubmit.co/ajax/firma.co.rs@gmail.com"
+              action="https://formsubmit.co/ajax/gaggimont@gmail.com"
               method="POST" novalidate>
 
           <input type="hidden" name="_subject" value="Novi upit sa sajta GAGI MONT">
@@ -1014,7 +1030,7 @@
       <h2>Kontakt</h2>
       <ul>
         <li><a href="tel:+381655522684">065/55-22-684</a></li>
-        <li><a href="mailto:firma.co.rs@gmail.com">firma.co.rs@gmail.com</a></li>
+        <li><a href="mailto:gaggimont@gmail.com">gaggimont@gmail.com</a></li>
         <li>Zelengorska 10a<br>18000 Niš, Srbija</li>
       </ul>
     </div>
