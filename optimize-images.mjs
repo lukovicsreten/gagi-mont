@@ -58,7 +58,26 @@ const jobs = [
     crop: { left: 0, right: 0, top: 0.26917, bottom: 0.28125 } },
   { src: 'harmonika-kuhinja.jpg',        out: 'harmonika-vrata-kuhinja',        w: 900,
     crop: { left: 0, right: 0, top: 0.26917, bottom: 0.28125 } },
+
+  // Serija sa terena: zebra zavese u dva stana, trakaste, roletne i zatvaranje terase.
+  { src: 'trakaste-zelene.jpg',    out: 'trakaste-zavese-zelene',        w: 1300, crop: NO_CROP },
+  { src: 'zebra-balkon.jpg',       out: 'zebra-zavese-balkonska-vrata',  w: 1000, crop: NO_CROP },
+  { src: 'zebra-trpezarija.jpg',   out: 'zebra-zavese-trpezarija',       w: 1000, crop: NO_CROP },
+  { src: 'zebra-spavaca.jpg',      out: 'zebra-zavese-spavaca',          w: 1000, crop: NO_CROP },
+  { src: 'zebra-kuhinja.jpg',      out: 'zebra-zavese-kuhinja',          w: 1000, crop: NO_CROP },
+  { src: 'roletne-fasada.jpg',     out: 'roletne-komarnici-fasada',      w: 1000, crop: NO_CROP },
+  { src: 'terasa-kamena.jpg',      out: 'zatvaranje-terase-kamena',      w: 1200, crop: NO_CROP },
+  { src: 'zebra-siva-detalj.jpg',  out: 'zebra-zavese-siva-detalj',      w: 1200, crop: NO_CROP },
+  { src: 'bele-roletne-niz.jpg',   out: 'bele-roletne-niz-prozora',      w: 1400, crop: NO_CROP },
+  { src: 'zebra-siva-soba.jpg',    out: 'zebra-zavese-siva-soba',        w: 1200, crop: NO_CROP },
+  { src: 'terasa-iznutra.jpg',     out: 'zatvaranje-terase-iznutra',     w: 1200, crop: NO_CROP },
 ];
+
+async function orientedMeta(file) {
+  const m = await sharp(file).metadata();
+  const swap = m.orientation >= 5 && m.orientation <= 8;
+  return { ...m, width: swap ? m.height : m.width, height: swap ? m.width : m.height };
+}
 
 function region(meta, crop) {
   const left = Math.round(meta.width * crop.left);
@@ -73,8 +92,7 @@ function region(meta, crop) {
 
 let total = 0;
 for (const job of jobs) {
-  const img = sharp(path.join(SRC, job.src), { autoOrient: true });
-  const meta = await img.metadata();
+  const meta = await orientedMeta(path.join(SRC, job.src));
   const base = sharp(path.join(SRC, job.src), { autoOrient: true })
     .extract(region(meta, job.crop))
     .resize({ width: job.w, withoutEnlargement: true });
@@ -87,7 +105,7 @@ for (const job of jobs) {
 // Hero: same frame, wider, plus a low-res blurred placeholder is unnecessary —
 // the hero is preloaded instead.
 {
-  const meta = await sharp(path.join(SRC, '15.png'), { autoOrient: true }).metadata();
+  const meta = await orientedMeta(path.join(SRC, '15.png'));
   await sharp(path.join(SRC, '15.png'), { autoOrient: true })
     .extract(region(meta, LANDSCAPE_CROP))
     .resize({ width: 1920, withoutEnlargement: true })
@@ -104,7 +122,7 @@ for (const job of jobs) {
 
 // Original logo artwork, trimmed of its outer frame.
 {
-  const meta = await sharp(path.join(SRC, '18.png'), { autoOrient: true }).metadata();
+  const meta = await orientedMeta(path.join(SRC, '18.png'));
   await sharp(path.join(SRC, '18.png'), { autoOrient: true })
     .extract({ left: 30, top: 30, width: meta.width - 60, height: meta.height - 60 })
     .resize({ width: 700 })
