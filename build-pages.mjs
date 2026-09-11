@@ -23,7 +23,7 @@
 
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 
-const DOMEN = 'https://www.gagi-mont.rs'; // mora biti isto kao canonical u index.html
+const DOMEN = 'https://gagi-mont.rs'; // mora biti isto kao canonical u index.html
 const TEL_PRIKAZ = '065/55-22-684';
 const TEL_HREF   = '+381655522684';
 const MAIL       = 'gaggimont@gmail.com';

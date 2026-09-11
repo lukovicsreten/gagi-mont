@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.gagi-mont.rs/</loc>
+    <loc>https://gagi-mont.rs/</loc>
     <lastmod>2026-09-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://www.gagi-mont.rs/usluge/roletne/</loc>
+    <loc>https://gagi-mont.rs/usluge/roletne/</loc>
     <lastmod>2026-09-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.gagi-mont.rs/usluge/tende/</loc>
+    <loc>https://gagi-mont.rs/usluge/tende/</loc>
     <lastmod>2026-09-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.gagi-mont.rs/usluge/komarnici/</loc>
+    <loc>https://gagi-mont.rs/usluge/komarnici/</loc>
     <lastmod>2026-09-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.gagi-mont.rs/usluge/zavese/</loc>
+    <loc>https://gagi-mont.rs/usluge/zavese/</loc>
     <lastmod>2026-09-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.gagi-mont.rs/blog/</loc>
+    <loc>https://gagi-mont.rs/blog/</loc>
     <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
