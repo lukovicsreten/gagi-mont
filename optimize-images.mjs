@@ -77,6 +77,20 @@ const jobs = [
   { src: 'rolo-sala-podignute.jpg', out: 'rolo-zavese-sala-podignute',    w: 1400, crop: NO_CROP },
   { src: 'rolo-kancelarija-siva.jpg', out: 'rolo-zavese-kancelarija-siva', w: 1300, crop: NO_CROP },
   { src: 'rolo-prozor-krem.jpg',    out: 'rolo-zavese-prozor-krem',       w: 1200, crop: NO_CROP },
+
+  // Tende sa terena — najtanja kategorija do sada.
+  { src: 'tenda-kafic-reklamna.jpg', out: 'tenda-kafic-reklamna',         w: 1400, crop: NO_CROP },
+  { src: 'tende-etno-galerija.jpg',  out: 'tende-etno-galerija',          w: 1400, crop: NO_CROP },
+  { src: 'tenda-crvena-balkon.jpg',  out: 'tenda-crvena-balkon',          w: 1400, crop: NO_CROP },
+  { src: 'pergola-platno.jpg',       out: 'pergola-platno',               w: 1400, crop: NO_CROP },
+  { src: 'tenda-vertikalna-loda.jpg', out: 'tenda-vertikalna-loda',       w: 1300, crop: NO_CROP },
+  // Vec isecen snimak ekrana (skinute trake telefona), zato NO_CROP.
+  { src: 'tende-kuca-pruge.jpg',     out: 'tende-kuca-pruge',             w: 722,  crop: NO_CROP },
+
+  // Prva fotografija okapnice — do sada prazna kategorija.
+  { src: 'okapnica-unutrasnja.jpg',  out: 'okapnica-unutrasnja',          w: 1400, crop: NO_CROP },
+
+  { src: 'rolo-spavaca-bez.jpg',     out: 'rolo-zavese-spavaca-bez',      w: 1400, crop: NO_CROP },
 ];
 
 async function orientedMeta(file) {

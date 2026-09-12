@@ -102,13 +102,20 @@ U `index.html`, u sekciji `<div class="gallery" id="gallery">`, kopiraj jedan
 **Obavezno upiši `data-kat`** — bez toga se slika ne pojavljuje ni u jednom
 filteru osim „Sve". Dozvoljene vrednosti (razdvojene razmakom ako slika
 pripada u više kategorija): `roletne tende zavese komarnici harmonika garazna
-terasa`. Puno uputstvo je i u samom `index.html`, kao komentar iznad galerije.
+terasa okapnice`. Puno uputstvo je i u samom `index.html`, kao komentar iznad
+galerije.
 
 Lightbox (uvećanje na klik) i filter rade automatski — ne treba ništa u JS-u.
 
+**Ako dodaješ sasvim novu kategoriju**, osim `data-kat` na slici treba i novo
+dugme u filter traci (`<div class="gal-filter">` u `index.html`). Broj pored
+naziva se računa sam; dugme se automatski sakrije ako u toj kategoriji nema
+nijedne slike.
+
 ### D) Šta još nedostaje
 
-* **Nema fotografija** za: venecijanere, okapnice i rasvetu/lustere/plafonjere.
+* **Nema fotografija** za: venecijanere i rasvetu/lustere/plafonjere.
+* **Okapnice** imaju samo jednu fotografiju — vredi dopuniti kad se ukaže prilika.
 * **Logo:** originalni logo je sačuvan kao `assets/images/gagi-mont-logo-original.webp`.
   U headeru se koristi SVG verzija (crta se kodom) da bi bila oštra na svakom
   ekranu i da radi i na tamnoj i na svetloj pozadini.
