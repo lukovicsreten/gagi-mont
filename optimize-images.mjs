@@ -91,6 +91,12 @@ const jobs = [
   { src: 'okapnica-unutrasnja.jpg',  out: 'okapnica-unutrasnja',          w: 1400, crop: NO_CROP },
 
   { src: 'rolo-spavaca-bez.jpg',     out: 'rolo-zavese-spavaca-bez',      w: 1400, crop: NO_CROP },
+
+  { src: 'rolo-decija-soba.jpg',     out: 'rolo-zavese-decija-soba',      w: 1100, crop: NO_CROP },
+  { src: 'rolo-kuhinja-bez.jpg',     out: 'rolo-zavese-kuhinja-bez',      w: 1400, crop: NO_CROP },
+  { src: 'tende-kuca-krem.jpg',      out: 'tende-kuca-krem',              w: 1100, crop: NO_CROP },
+  { src: 'rolo-radna-soba.jpg',      out: 'rolo-zavese-radna-soba',       w: 1400, crop: NO_CROP },
+  { src: 'zebra-dnevna-soba.jpg',    out: 'zebra-zavese-dnevna-soba',     w: 1400, crop: NO_CROP },
 ];
 
 async function orientedMeta(file) {
